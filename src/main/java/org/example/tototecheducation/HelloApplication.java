@@ -124,6 +124,19 @@ public class HelloApplication extends Application {
         choices.setAlignment(Pos.CENTER);
         choices.getChildren().addAll(choice1, choice2, choice3, choice4);
 
+
+
+        centerContent.getChildren().addAll(questionNumber ,question, choices);
+        root.setCenter(centerContent);
+
+        BorderPane border2 = new BorderPane();
+        VBox elements = new VBox(10);
+        Label text = new Label("Hello World");
+        elements.getChildren().addAll(text);
+        border2.setCenter(elements);
+        Scene scene2 = new Scene(border2, 640, 480);
+        Scene scene = new Scene(root);
+
         // Bottom: Three buttons aligned at the center bottom
         HBox bottomButtons = new HBox(10); // 10px spacing between buttons
         Button previousButton = new Button("Previous");
@@ -132,12 +145,13 @@ public class HelloApplication extends Application {
 
         bottomButtons.getChildren().addAll(previousButton, homeButton, nextButton);
         bottomButtons.setAlignment(Pos.CENTER);
+        root.setBottom(bottomButtons);
 
-        centerContent.getChildren().addAll(questionNumber ,question, choices, bottomButtons);
-        root.setCenter(centerContent);
+
+        homeButton.setOnAction(event -> primaryStage.setScene(scene2));
+        nextButton.setOnAction(event -> primaryStage.setScene(scene));
 
         // Create the Scene and set it in the Stage
-        Scene scene = new Scene(root);
         primaryStage.setTitle("TotoTechEducation");
         primaryStage.setScene(scene);
         primaryStage.show();
