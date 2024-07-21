@@ -121,12 +121,20 @@ public class HelloApplication extends Application {
         choice4.setToggleGroup(group);
 
         VBox choices = new VBox(5); // 5px spacing between choices
-        choices.setAlignment(Pos.CENTER);
+        choices.setAlignment(Pos.CENTER_LEFT);
         choices.getChildren().addAll(choice1, choice2, choice3, choice4);
+        choices.setPadding(new Insets(0, 10, 10, 250));
 
 
+        // Bottom: Three buttons aligned at the center bottom
+        HBox bottomButtons = new HBox(10); // 10px spacing between buttons
+        Button previousButton = new Button("Previous");
+        Button homeButton = new Button("Home");
+        Button nextButton = new Button("Next");
+        bottomButtons.setAlignment(Pos.CENTER);
+        bottomButtons.getChildren().addAll(previousButton, homeButton, nextButton);
 
-        centerContent.getChildren().addAll(questionNumber ,question, choices);
+        centerContent.getChildren().addAll(questionNumber ,question, choices, bottomButtons);
         root.setCenter(centerContent);
 
         BorderPane border2 = new BorderPane();
@@ -136,17 +144,6 @@ public class HelloApplication extends Application {
         border2.setCenter(elements);
         Scene scene2 = new Scene(border2, 640, 480);
         Scene scene = new Scene(root);
-
-        // Bottom: Three buttons aligned at the center bottom
-        HBox bottomButtons = new HBox(10); // 10px spacing between buttons
-        Button previousButton = new Button("Previous");
-        Button homeButton = new Button("Home");
-        Button nextButton = new Button("Next");
-
-        bottomButtons.getChildren().addAll(previousButton, homeButton, nextButton);
-        bottomButtons.setAlignment(Pos.CENTER);
-        root.setBottom(bottomButtons);
-
 
         homeButton.setOnAction(event -> primaryStage.setScene(scene2));
         nextButton.setOnAction(event -> primaryStage.setScene(scene));
