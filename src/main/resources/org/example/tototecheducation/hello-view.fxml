@@ -23,6 +23,12 @@
          <Button layoutX="186.0" layoutY="125.0" onAction="#homeClicked" text="HOME" />
          <Button layoutX="116.0" layoutY="125.0" onAction="#prevClicked" text="PREV" />
          <Button layoutX="261.0" layoutY="125.0" onAction="#nextClicked" text="NEXT" />
+         <Button layoutX="14.0" layoutY="13.0" onAction="#resultsClicked" text="Results" />
+         <Label fx:id="results" layoutX="194.0" layoutY="16.0" prefHeight="94.0" prefWidth="106.0" wrapText="true">
+            <font>
+               <Font name="Noto Sans Adlam Unjoined Bold" size="38.0" />
+            </font>
+         </Label>
       </children>
    </AnchorPane>
 </VBox>

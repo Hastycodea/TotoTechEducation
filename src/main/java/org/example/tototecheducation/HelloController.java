@@ -1,12 +1,17 @@
 package org.example.tototecheducation;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class HelloController {
     @FXML
-    private Label question;
+    private Label question, results;
 
     @FXML
     private RadioButton choice1, choice2, choice3, choice4;
@@ -14,11 +19,35 @@ public class HelloController {
     private int counter = 1;
 
     @FXML
+    private ToggleGroup toggleGroup;
+
+    private final Map<Integer, RadioButton> selectedRadioButtons = new HashMap<>();
+
+    private final String[] correctAnswers = {"Jupiter","Au","Harper Lee","Jaipur", "Diamond","Leonardo da Vinci","Miso paste","8", "Blue Whale","Yen" };
+
+    private int marks = 0;
+
+
+    @FXML
     public void initialize() {
+        toggleGroup = new ToggleGroup();
+        choice1.setToggleGroup(toggleGroup);
+        choice2.setToggleGroup(toggleGroup);
+        choice3.setToggleGroup(toggleGroup);
+        choice4.setToggleGroup(toggleGroup);
+
         loadQuestions();
+
+        toggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+           if (newValue != null) {
+               RadioButton selected = (RadioButton) newValue;
+               selectedRadioButtons.put(counter, selected);
+           }
+        });
     }
 
     private void loadQuestions() {
+        toggleGroup.selectToggle(null);
         switch (counter) {
             case 1:
                 question.setText("1. What is the largest planet in our solar system?");
@@ -95,10 +124,14 @@ public class HelloController {
                 loadQuestions();
                 break;
         }
+        if (selectedRadioButtons.containsKey(counter)) {
+            toggleGroup.selectToggle(selectedRadioButtons.get(counter));
+        }
     }
 
     @FXML
     protected void prevClicked() {
+        checkAnswer();
         if (counter > 1) {
             counter--;
         } else {
@@ -109,6 +142,7 @@ public class HelloController {
 
     @FXML
     protected void nextClicked() {
+        checkAnswer();
         if (counter <= 10) {
             counter++;
         } else {
@@ -119,8 +153,21 @@ public class HelloController {
 
     @FXML
     protected void homeClicked() {
+        checkAnswer();
         counter = 1;
         loadQuestions();
+    }
+    private void checkAnswer() {
+        RadioButton selected = (RadioButton) toggleGroup.getSelectedToggle();
+        if (selected != null) {
+            if (selected.getText().equals(correctAnswers[counter - 1])) {
+                marks++;
+            }
+        }
+    }
+
+    public void resultsClicked() {
+        results.setText(marks + "/ 10");
     }
 }
 
