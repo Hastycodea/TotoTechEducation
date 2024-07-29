@@ -2,16 +2,23 @@ package org.example.tototecheducation;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class HelloController {
     @FXML
-    private Label question, results;
+    private Label question, remarks;
 
     @FXML
     private RadioButton choice1, choice2, choice3, choice4;
@@ -25,7 +32,7 @@ public class HelloController {
 
     private final String[] correctAnswers = {"Jupiter","Au","Harper Lee","Jaipur", "Diamond","Leonardo da Vinci","Miso paste","8", "Blue Whale","Yen" };
 
-    private int marks = 0;
+    static int marks = 0;
 
 
     @FXML
@@ -166,8 +173,24 @@ public class HelloController {
         }
     }
 
-    public void resultsClicked() {
-        results.setText(marks + "/ 10");
+    public void resultsClicked(ActionEvent event) {
+        try{
+            Stage thisstage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            thisstage.close();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("results.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+
+            Stage stage = new Stage();
+            stage.setTitle("TotoTechEducation");
+            stage.setScene(scene);
+//            stage.initStyle(StageStyle.TRANSPARENT);
+//            scene.setFill(Color.TRANSPARENT);
+            stage.show();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 

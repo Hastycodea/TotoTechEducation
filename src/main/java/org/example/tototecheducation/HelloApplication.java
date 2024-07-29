@@ -17,8 +17,8 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("TotoTechEducation");
         stage.setScene(scene);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        scene.setFill(Color.TRANSPARENT);
+//        stage.initStyle(StageStyle.TRANSPARENT);
+//        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
 
