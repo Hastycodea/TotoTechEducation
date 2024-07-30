@@ -36,7 +36,6 @@ public class HelloController {
 
     private boolean[] isCorrect = new boolean[correctAnswers.length];
 
-
     @FXML
     public void initialize() {
         toggleGroup = new ToggleGroup();
@@ -53,11 +52,11 @@ public class HelloController {
                selectedRadioButtons.putIfAbsent(counter, selected);
            }
         });
-
     }
 
     private void loadQuestions() {
         toggleGroup.selectToggle(null);
+        remarks.setText("Question: " + counter);
         switch (counter) {
             case 1:
                 question.setText("1. What is the largest planet in our solar system?");
@@ -196,6 +195,25 @@ public class HelloController {
             stage.show();
         }
         catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void subjectClicked(ActionEvent event) {
+        try{
+            Stage thisstage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            thisstage.close();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("subject.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+
+            Stage stage = new Stage();
+            stage.setTitle("TotoTechEducation");
+            stage.setScene(scene);
+//            stage.initStyle(StageStyle.TRANSPARENT);
+//            scene.setFill(Color.TRANSPARENT);
+            stage.show();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
