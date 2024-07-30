@@ -34,6 +34,8 @@ public class HelloController {
 
     static int marks = 0;
 
+    private boolean[] isCorrect = new boolean[correctAnswers.length];
+
 
     @FXML
     public void initialize() {
@@ -48,9 +50,10 @@ public class HelloController {
         toggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
            if (newValue != null) {
                RadioButton selected = (RadioButton) newValue;
-               selectedRadioButtons.put(counter, selected);
+               selectedRadioButtons.putIfAbsent(counter, selected);
            }
         });
+
     }
 
     private void loadQuestions() {
@@ -163,17 +166,21 @@ public class HelloController {
         checkAnswer();
         counter = 1;
         loadQuestions();
+
     }
     private void checkAnswer() {
         RadioButton selected = (RadioButton) toggleGroup.getSelectedToggle();
         if (selected != null) {
-            if (selected.getText().equals(correctAnswers[counter - 1])) {
+            if (selected.getText().equals(correctAnswers[counter - 1]) && !isCorrect[counter -1]) {
                 marks++;
+                isCorrect[counter - 1] = true;
             }
         }
     }
 
+
     public void resultsClicked(ActionEvent event) {
+        checkAnswer();
         try{
             Stage thisstage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             thisstage.close();
@@ -191,6 +198,11 @@ public class HelloController {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void resetFields() {
+        marks = 0;
+        selectedRadioButtons.clear();
     }
 }
 

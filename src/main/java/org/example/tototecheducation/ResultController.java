@@ -25,17 +25,20 @@ public class ResultController {
     public void retakeClicked(ActionEvent event) throws IOException {
         try{
             Stage thisstage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            thisstage.close();
 
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
 
-            Stage stage = new Stage();
-            stage.setTitle("TotoTechEducation");
-            stage.setScene(scene);
+            // get the controller of HelloController
+            HelloController controller = fxmlLoader.getController();
+            // reset the controller to its initial state
+            controller.resetFields();
+
+            thisstage.setTitle("TotoTechEducation");
+            thisstage.setScene(scene);
 //            stage.initStyle(StageStyle.TRANSPARENT);
 //            scene.setFill(Color.TRANSPARENT);
-            stage.show();
+            thisstage.show();
         }
         catch (Exception e) {
             e.printStackTrace();
