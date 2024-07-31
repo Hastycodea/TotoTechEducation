@@ -34,8 +34,48 @@ public class SubjectController {
     }
 
     public void engClicked(ActionEvent actionEvent) {
+        try{
+            Stage thisStage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            // get the controller of HelloController
+            HelloController controller = loader.getController();
+            // resetting fields
+            controller.resetFields();
+
+            thisStage.setTitle("TotoTech Education");
+            thisStage.setScene(scene);
+            thisStage.show();
+
+
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void kisClicked(ActionEvent actionEvent) {
+        try{
+            Stage thisStage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            // get the controller of HelloController
+            HelloController controller = loader.getController();
+            // resetting fields
+            controller.resetFields();
+
+            thisStage.setTitle("TotoTech Education");
+            thisStage.setScene(scene);
+            thisStage.show();
+
+
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
