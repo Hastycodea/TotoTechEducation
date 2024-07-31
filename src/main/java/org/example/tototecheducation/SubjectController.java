@@ -78,4 +78,21 @@ public class SubjectController {
             e.printStackTrace();
         }
     }
+
+    public void notesClicked(ActionEvent actionEvent) {
+        try{
+            Stage thisStage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("notes.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            thisStage.setTitle("TotoTech Education");
+            thisStage.setScene(scene);
+            thisStage.show();
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }
