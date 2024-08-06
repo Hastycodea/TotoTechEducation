@@ -4,7 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class NotesController {
     public void subjectClicked(ActionEvent event) {
@@ -19,7 +21,7 @@ public class NotesController {
             stage.setTitle("TotoTechEducation");
             stage.setScene(scene);
 //            stage.initStyle(StageStyle.TRANSPARENT);
-//            scene.setFill(Color.TRANSPARENT);
+            scene.setFill(Color.TRANSPARENT);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

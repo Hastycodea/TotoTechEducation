@@ -210,8 +210,8 @@ public class HelloController {
             Stage stage = new Stage();
             stage.setTitle("TotoTechEducation");
             stage.setScene(scene);
-//            stage.initStyle(StageStyle.TRANSPARENT);
-//            scene.setFill(Color.TRANSPARENT);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            scene.setFill(Color.TRANSPARENT);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

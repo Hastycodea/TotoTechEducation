@@ -5,7 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -24,6 +26,8 @@ public class SubjectController {
 
             thisStage.setTitle("TotoTech Education");
             thisStage.setScene(scene);
+//            thisStage.initStyle(StageStyle.TRANSPARENT);
+            scene.setFill(Color.TRANSPARENT);
             thisStage.show();
 
 
@@ -47,6 +51,8 @@ public class SubjectController {
 
             thisStage.setTitle("TotoTech Education");
             thisStage.setScene(scene);
+//            thisStage.initStyle(StageStyle.TRANSPARENT);
+            scene.setFill(Color.TRANSPARENT);
             thisStage.show();
 
 
@@ -70,6 +76,8 @@ public class SubjectController {
 
             thisStage.setTitle("TotoTech Education");
             thisStage.setScene(scene);
+//            thisStage.initStyle(StageStyle.TRANSPARENT);
+            scene.setFill(Color.TRANSPARENT);
             thisStage.show();
 
 
@@ -88,11 +96,25 @@ public class SubjectController {
 
             thisStage.setTitle("TotoTech Education");
             thisStage.setScene(scene);
+//            thisStage.initStyle(StageStyle.TRANSPARENT);
+            scene.setFill(Color.TRANSPARENT);
             thisStage.show();
 
         }catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+
+    public void logOutClicked(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+        Scene scene = new Scene(loader.load());
+
+        stage.setScene(scene);
+//        stage.initStyle(StageStyle.TRANSPARENT);
+        scene.setFill(Color.TRANSPARENT);
+        stage.show();
 
     }
 }
