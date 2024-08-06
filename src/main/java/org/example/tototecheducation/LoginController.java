@@ -8,6 +8,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class LoginController {
 
     @FXML
@@ -22,19 +28,40 @@ public class LoginController {
     @FXML
     private PasswordField passwordPasswordField;
 
-    public void loginButtonOnAction(ActionEvent event) {
-//        loginMessage.setText("You tried to login bitch!");
-
+    public void loginButtonOnAction(ActionEvent event) throws SQLException {
         if (usernameTextField.getText().equals("") || passwordPasswordField.getText().equals("")) {
             loginMessage.setText("Please enter your username and password!");
-        } else {
-            loginMessage.setText("Login successful!");
         }
+        validateLogin(event);
     }
 
     public void cancelButtonOnAction(ActionEvent actionEvent) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void validateLogin(ActionEvent event) throws SQLException {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
+
+        String verifyLogin = "select count(1) from UserAccounts where username = '"+usernameTextField.getText()+"' and password = '"+passwordPasswordField.getText()+"'";
+        Statement statement = connectDB.createStatement();
+
+        ResultSet resultSet = statement.executeQuery(verifyLogin);
+
+        while (resultSet.next()) {
+            if (resultSet.getInt(1) == 1) {
+//                loginMessage.setText("Login successful!");
+                subject(event);
+            } else {
+                loginMessage.setText("Login failed!");
+            }
+        }
+    }
+
+    public void subject(ActionEvent event) throws SQLException {
+        HelloController helloController = new HelloController();
+        helloController.subjectClicked(event);
     }
 
 }
