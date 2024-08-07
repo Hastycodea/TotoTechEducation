@@ -2,6 +2,8 @@ package org.example.tototecheducation;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -9,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,4 +67,19 @@ public class LoginController {
         helloController.subjectClicked(event);
     }
 
+    public void signIn(ActionEvent event) throws SQLException, IOException {
+        Stage thisstage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        thisstage.close();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("signup.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void signUpOnAction(ActionEvent actionEvent) throws SQLException, IOException {
+        signIn(actionEvent);
+    }
 }

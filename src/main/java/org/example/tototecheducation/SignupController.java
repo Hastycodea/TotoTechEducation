@@ -6,6 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import javax.security.auth.Subject;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -19,13 +21,17 @@ public class SignupController {
     private Label alert;
 
     @FXML
-    private PasswordField passwordTextField, confirmPasswordTextField;
+    private PasswordField passwordField;
 
     public void signUpOnAction(ActionEvent actionEvent) throws SQLException {
-        validateSignUp(actionEvent);
+        if (firstNameTextField.getText().isEmpty() || lastNameTextField.getText().isEmpty()) {
+            alert.setText("Please fill all the fields");
+        } else {
+            validateSignUp();
+        }
     }
 
-    private void validateSignUp(ActionEvent event) throws SQLException {
+    private void validateSignUp() throws SQLException {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         Connection connection = databaseConnection.getConnection();
 
@@ -35,21 +41,20 @@ public class SignupController {
         preparedStatement.setString(1, firstNameTextField.getText());
         preparedStatement.setString(2, lastNameTextField.getText());
         preparedStatement.setString(3, userNameTextField.getText());
+        preparedStatement.setString(4, passwordField.getText());
 
-        if (passwordTextField.getText().equals(confirmPasswordTextField.getText())) {
-            preparedStatement.setString(4, passwordTextField.getText());
-        } else {
-            alert.setText("Passwords do not match");
-        }
         int result = preparedStatement.executeUpdate();
         if (result == 1) {
-            alert.setText("successfully registered! you can sign in");
-            login(event);
+            alert.setText("successfully registered! you can now sign in");
         }
     }
 
-    public void login (ActionEvent actionEvent) throws SQLException {
-        LoginController loginController = new LoginController();
-        loginController.loginButtonOnAction(actionEvent);
+    public void login (ActionEvent actionEvent) throws SQLException, IOException {
+        SubjectController subjectController = new SubjectController();
+        subjectController.logOutClicked(actionEvent);
+    }
+
+    public void signInOnAction(ActionEvent actionEvent) throws SQLException, IOException {
+        login(actionEvent);
     }
 }
